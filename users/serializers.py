@@ -8,6 +8,12 @@ class UserViewSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+    def create(seif, vaildated_data):
+
+        
+        return
+
+
 
 class CustomTokenObtainPairView(TokenObtainPairSerializer):
     @classmethod
