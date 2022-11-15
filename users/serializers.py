@@ -3,25 +3,30 @@ from users.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-class UserViewSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
 
     def create(seif, vaildated_data):
+        user = super().create(vaildated_data)
+        password = user.password
+        user.set_password(password)
+        user.save()
+        return
 
-        
+    def update(seif, vaildated_data):
+        user = super().create(vaildated_data)
+        password = user.password
+        user.set_password(password)
+        user.save()
         return
 
 
 
-class CustomTokenObtainPairView(TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        # Add custom claims
         token['email'] = user.email
-        # ...
-
         return token
