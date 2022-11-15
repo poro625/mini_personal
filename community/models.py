@@ -6,4 +6,3 @@ class Movie(models.Model):
     image = models.ImageField()
     original_title = models.CharField(max_length=100)
     title = models.CharField(max_length=50)
-    release_year = models.
