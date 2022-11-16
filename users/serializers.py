@@ -13,16 +13,19 @@ class UserSerializer(serializers.ModelSerializer):
         password = user.password
         user.set_password(password)
         user.save()
-        return
+        return user
 
     def update(seif, vaildated_data):
         user = super().create(vaildated_data)
         password = user.password
         user.set_password(password)
         user.save()
-        return
+        return user
 
-
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username"]
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
