@@ -2,7 +2,7 @@ from community.models import Community
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import CommunityViewSerializer, CommunityListViewSerializer
+from .serializers import CommunityViewSerializer, CommunityListViewSerializer, CommunityCreateSerializer
 
 class CommunityView(APIView):
     def get(self, request):
@@ -12,10 +12,11 @@ class CommunityView(APIView):
         
     def post(self, request):
         print(request.user)
-        serializer = CommunityViewSerializer(data=request.data)
+        serializer = CommunityCreateSerializer(data=request.data)
         print(request.user)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(user=request.user)
+            # serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

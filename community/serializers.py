@@ -10,11 +10,15 @@ class CommunityViewSerializer(serializers.ModelSerializer):
 class CommunityListViewSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
 
-        
-
     class Meta:
         model = Community
-        fields = ("pk","user", "title", "image","contnent")
+        fields = ("pk","user", "title", "image","content")
     
     def get_user(self,obj):
         return obj.user.email
+
+class CommunityCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Community
+        fields = ("title", "image","content")
