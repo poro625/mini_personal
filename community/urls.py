@@ -1,13 +1,17 @@
 from django.urls import path
 from community import views
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-
     path('', views.CommunityView.as_view(), name='community_view'),
-    path('<int:community_id>/', views.CommunityDetailView.as_view(), name='comunity_detail_View'),
-    path('<int:community_id>/Movies/', views.MovieDetail.as_view(), name='movie_detail_View'),
-    path('like/', views.LikeMovies.as_view(), name='likes_View'),
+    path('<int:article_id>/', views.CommunityDetailView.as_view(), name='community_detail_view'),
+    path('<int:article_id>/comment/', views.CommentView.as_view(), name='coment_view'),
+    path('<int:article_id>/comment/<int:comment_id>/', views.CommentDetailView.as_view(), name='comment_detail_view'),
+    path('<int:article_id>/like/', views.LikeView.as_view(), name='like_view'),
+
     
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
