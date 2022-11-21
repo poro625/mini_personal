@@ -15,7 +15,7 @@ class CommunityView(APIView):
         serializer = CommunityCreateSerializer(data=request.data)
         print(request.user)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save()
             # serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else :
